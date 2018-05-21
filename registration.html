@@ -8,7 +8,88 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript">
+        function formkontrol() {
 
+            name = document.getElementById('name').value;
+            lastname = document.getElementById('lastname').value;
+            email = document.getElementById('email').value;
+            dateofbirth = document.getElementById('dateofbirth').value;
+            password = document.getElementById('password').value;
+            rpassword = document.getElementById('rpassword').value;
+
+            var re = /^[A-Za-z]+$/;
+            var hata = new Array();
+            var vl = new Array()
+            var sembol = '*|,:<>[]{}`;()@&$#%!+-"/';
+            var filter = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            var sembolvar = false;
+            for (var i = 0; i < password.length; i++) {
+                if (sembol.indexOf(password.charAt(i)) != -1) {
+                    sembolvar = true;
+
+                }
+            }
+
+            if (name == "")
+                hata.push('Please enter name');
+            else {
+                if (re.test(document.getElementById("name").value))
+                    vl.push('valid Name.');
+                else
+                    hata.push('Invalid Name.');
+            }
+
+            if (lastname == "")
+                hata.push('Please enter lastname');
+            else {
+                if (re.test(document.getElementById("lastname").value))
+                    vl.push('valid Lastname.');
+                else
+                    hata.push('Invalid Lastname.');
+            }
+
+            if (email == "")
+                hata.push('Please enter email');
+
+            if (dateofbirth == "")
+                hata.push('Please enter date of birth');
+
+            if (password == '')
+                hata.push('Please enter password');
+            else {
+                if (password != rpassword)
+                    hata.push('Passwords must be equals.');
+
+                else if (password.length < 6)
+                    hata.push('Password must be 6 characters or larger.');
+
+                else if (password.length > 15)
+                    hata.push('Password must be 15 characters or smaller.');
+
+                else if (password.search(/[a-z]/) < 0)
+                    hata.push("Password must contain at least one lower case letter.");
+
+                else if (password.search(/[A-Z]/) < 0)
+                    hata.push("Password must contain at least one o upper case letter.");
+
+                else if (password.search(/[0-9]/) < 0)
+                    hata.push("Password must contain at least one number.");
+
+                else if (sembolvar == false)
+                    hata.push("Password must contain at least one symbol.");
+
+            }
+
+            if (hata.length > 0) {
+                alert(hata.join("\n"));
+                return false;
+            } else alert('Sumbit successful! Go to calculator page');
+            window.open('calculator.html');
+
+        }
+    </script>
 </head>
 
 <body>
@@ -19,125 +100,139 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-            <a class="nav-link " href="home.html">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="localdishes.html">Local Dishes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link " href="historicalplaces.html">Historical Places</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="usefullinks.html">Useful Links</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link " href="aboutme.html">About Me</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="contactme.html">Contact Me</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active " href="registration.html">Registration</a>
-        </li>
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="localdishes.html">Local Dishes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="historicalplaces.html">Historical Places</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="usefullinks.html">Useful Links</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="aboutme.html">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contactme.html">Contact Me</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="registration.html">Registration<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <hr width="100%">
     <div class="container">
-        <form class="form-horizontal" action="thanksforregistration.html" method="get">
+        <form class="form-horizontal" action="" onsubmit="return validate()" method="get">
 
             <div class="form-group row">
-                <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName3" placeholder="Name" required>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="inputLastName3" class="col-sm-2 col-form-label">LastName</label>
+                <label for="lastname" class="col-sm-2 col-form-label">LastName</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputLastName3" placeholder="LastName" required>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="LastName">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="inputDate3" class="col-sm-2 col-form-label">Date of Birth</label>
+                <label for="dateofbirth" class="col-sm-2 col-form-label">Date of Birth</label>
                 <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputDate3" max="2018-01-01" min="1900-01-01" required>
+                    <input type="date" class="form-control" id="dateofbirth" name="dateofbirth">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                <label for="rpassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="rpassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="rpassword" name="rpassword" placeholder="Password">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="inlineFormCustomSelectPref">Gender</label>
                 <div class="col-sm-10">
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" required>
-                    <option selected>Choose...</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
-                    </select></div></div>
+                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" required>
+                        <option selected>Choose...</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                    </select>
+                </div>
+            </div>
 
-            
-                <div class="form-group row">
-                    <div class="col-sm-2">Interests:</div>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck1">
-                            <label class="form-check-label" for="gridCheck1">
-                                Code
-                            </label>
-                            <br>
-                            <input class="form-check-input" type="checkbox" id="gridCheck1">
-                            <label class="form-check-label" for="gridCheck1">
-                                Swim
-                            </label>
-                            <br>
-                            <input class="form-check-input" type="checkbox" id="gridCheck1">
-                            <label class="form-check-label" for="gridCheck1">
-                                Basketball
-                            </label>
-                            <br>
-                            <input class="form-check-input" type="checkbox" id="gridCheck1">
-                            <label class="form-check-label" for="gridCheck1">
-                                Football
-                            </label>
-                            <br>
-                            <input class="form-check-input" type="checkbox" id="gridCheck1">
-                            <label class="form-check-label" for="gridCheck1">
-                                Running
-                            </label>
-                        </div>
+            <div class="form-group row">
+                <div class="col-sm-2">Interests:</div>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Code
+                        </label>
+                        <br>
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Swim
+                        </label>
+                        <br>
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Basketball
+                        </label>
+                        <br>
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Football
+                        </label>
+                        <br>
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Running
+                        </label>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-success">Sign in</button>
-                    </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" onclick="formkontrol();" class="btn btn-success">Submit</button>
                 </div>
+            </div>
 
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="reset" class="btn btn-default">Reset</button>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="reset" class="btn btn-default">Reset</button>
 
-                    </div>
                 </div>
+            </div>
 
-            </form>
+        </form>
     </div>
 </body>
 
